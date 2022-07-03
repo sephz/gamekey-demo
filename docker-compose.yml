@@ -1,0 +1,19 @@
+services:
+  game-key:
+    container_name: game-key
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+      args:
+        APP_USER: ${UID:-1000}
+        APP_GROUP: ${GID:-1000}
+        CURRENT_ENVIRONMENT: development
+    volumes:
+      - ./:/app
+    ports:
+      - "80:80"
+    networks:
+      - internal
+networks:
+  internal:
