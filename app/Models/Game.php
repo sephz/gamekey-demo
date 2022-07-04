@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @OA\Schema(
  * @OA\Xml(name="Game"),
  * @OA\Property(property="id", type="integer", readOnly="true", example="1"),
+ * @OA\Property(property="merchant_id", type="integer", readOnly="true", description="Foreign key of merchant", example="1"),
  * @OA\Property(property="title", type="string", maxLength=200, description="Game title", example="Steam"),
  * @OA\Property(property="description", type="text", description="Game description", example="A cross platform gaming system."),
  * @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),

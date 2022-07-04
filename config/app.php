@@ -187,6 +187,7 @@ return [
          */
 
         Spatie\Permission\PermissionServiceProvider::class,
+        MarvinLabs\Luhn\LuhnServiceProvider::class,
         /*
          * Application Service Providers...
          */

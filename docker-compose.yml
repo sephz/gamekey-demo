@@ -24,7 +24,7 @@ services:
           - MYSQL_USER=db_user
           - MYSQL_PASSWORD=db_password
       volumes:
-          - db:/var/lib/mysql
+          - ./docker-db:/var/lib/mysql
       ports:
           - "3306:3306"
       networks:

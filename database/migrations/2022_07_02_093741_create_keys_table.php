@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('keys', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('game_id')->constrained('games');
             $table->string('key',80);
+            $table->string('currency',3)->default('MYR');
             $table->unsignedInteger('price');
             $table->timestamp('sold_at')->nullable();
             $table->timestamps();

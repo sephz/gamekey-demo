@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class GameController extends Controller
@@ -43,6 +45,13 @@ class GameController extends Controller
      *        )
      *     ),
      * @OA\Response(
+     *    response=400,
+     *    description="Failed, missing merchant profile",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="There is no merchant profile for this account")
+     *        )
+     *     ),
+     * @OA\Response(
      *    response=422,
      *    description="Failed validation response",
      *    @OA\JsonContent(
@@ -55,7 +64,34 @@ class GameController extends Controller
 
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'title' => 'required|max:200',
+            'description' => 'sometimes|min:50',
+        ]);
+
+        // check if user has merchant
+
+        $merchant = Auth::user()->merchant()->first();
+
+        if ( $merchant === null ){
+
+            return response()->json(['message' => 'There is no merchant profile for this account'],400);
+
+        }else{
+
+            $game = Game::create([
+                'merchant_id' => $merchant->id,
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+            ]);
+
+            return response()->json([
+                'id' => $game->id,
+                'title' => $game->title,
+                'description' => $game->description,
+            ]);
+        }
     }
 
     /**
@@ -84,9 +120,20 @@ class GameController extends Controller
      * )
      */
 
-    public function show(Game $game)
+    public function show($game)
     {
-        //
+
+        try{
+            $data = Auth::user()->game()->findOrFail($game);
+        }catch (\Exception $e) {
+            return response()->json(['message' => 'There is no game profile for this user'],400);
+        }
+
+        return response()->json([
+            'id' => $data->id,
+            'title' => $data->title,
+            'description' => $data->description,
+        ]);
     }
 
     /**

@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('merchants', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->string('name',100);
             $table->string('callback_url',150);
             $table->string('secret',100);
+            $table->boolean('active');
             $table->timestamps();
             $table->softDeletes();
         });

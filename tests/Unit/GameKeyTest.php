@@ -2,17 +2,19 @@
 
 namespace Tests\Unit;
 
+use App\Models\Key;
 use PHPUnit\Framework\TestCase;
 
 class GameKeyTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_example()
+
+    /** @test */
+    public function test_get_key_price_in_dollars()
     {
-        $this->assertTrue(true);
+        $key = Key::factory()->make([
+            'price' => 10000,
+        ]);
+
+        $this->assertSame('100.00', $key->formatted_price);
     }
 }

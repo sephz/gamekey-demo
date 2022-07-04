@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('merchant_id')->constrained('merchants');
+            $table->string('title', 200);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d9b1e705fcdce5f80cfa295d8fd7249",
+    "content-hash": "93ca48e3415b92f2dd404605e6b6b034",
     "packages": [
         {
             "name": "brick/math",
@@ -1749,6 +1749,77 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "marvinlabs/laravel-luhn",
+            "version": "v1.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marvinlabs/laravel-luhn.git",
+                "reference": "ccdbe7682080a2c41238fc33729a6aebca8b37f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marvinlabs/laravel-luhn/zipball/ccdbe7682080a2c41238fc33729a6aebca8b37f6",
+                "reference": "ccdbe7682080a2c41238fc33729a6aebca8b37f6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.5|^6.0|^7.0|^8.0|^9.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.9",
+                "orchestra/testbench": "^3.6|^4.0|^5.0|^6.0|^7.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MarvinLabs\\Luhn\\LuhnServiceProvider"
+                    ],
+                    "aliases": {
+                        "Luhn": "MarvinLabs\\Luhn\\Facades\\Luhn"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MarvinLabs\\Luhn\\": "src/Luhn"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Mimoun-Prat",
+                    "email": "contact@vincentprat.info",
+                    "homepage": "https://vincentprat.info",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Luhn algorithm for Laravel",
+            "keywords": [
+                "Siren",
+                "Siret",
+                "credit card",
+                "laravel",
+                "luhn"
+            ],
+            "support": {
+                "issues": "https://github.com/marvinlabs/laravel-luhn/issues",
+                "source": "https://github.com/marvinlabs/laravel-luhn/tree/v1.0.10"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/vpratfr",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-02-16T14:09:50+00:00"
         },
         {
             "name": "monolog/monolog",
