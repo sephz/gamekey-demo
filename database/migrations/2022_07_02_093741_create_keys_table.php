@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('key',80);
             $table->unsignedInteger('price');
-            $table->timestamp('sold_at');
+            $table->timestamp('sold_at')->nullable();
             $table->timestamps();
         });
     }

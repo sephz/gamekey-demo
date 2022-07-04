@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
  * @OA\Schema(
  * @OA\Xml(name="Transaction"),
  * @OA\Property(property="id", type="integer", readOnly="true", example="1"),
- * @OA\Property(property="key", type="string", maxLength=80, description="Game key", example="ASDAS1000"),
- * @OA\Property(property="uuid", type="uuid", description="Payment Reference", example="cae9cb39-2424-4038-a837-f128959823d1"),
+ * @OA\Property(property="transaction_id", type="uuid", description="Payment Reference", example="cae9cb39-2424-4038-a837-f128959823d1"),
+ * @OA\Property(property="key_id", type="integer", readOnly="true", description="Foreign key of key", example="1"),
  * @OA\Property(property="merchant_id", type="integer", readOnly="true", description="Foreign key of merchant", example="1"),
  * @OA\Property(property="user_id", type="integer", readOnly="true", description="Foreign key of user",  example="1"),
  * @OA\Property(property="currency", type="string", maxLength=3, description="Currency",  example="MYR"),
  * @OA\Property(property="total_paid", type="integer", description="Total Paid in cents", example="1000"),
- * @OA\Property(property="comission", type="integer", description="Comission in cents", example="50"),
+ * @OA\Property(property="commission", type="integer", description="Commission in cents", example="50"),
  * @OA\Property(property="cc_last", type="string", maxLength=4, description="Last four digits of credit card number", example="1234"),
  * @OA\Property(property="status", type="string", maxLength=25, description="Payment Status", example="COMPLETED"),
  * @OA\Property(property="paid_at", type="date-time"),
@@ -42,5 +42,21 @@ class Transaction extends Model
     public function merchant()
     {
         return $this->belongsTo(Merchant::class, 'merchants');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function key()
+    {
+        return $this->hasOne(Key::class, 'keys');
     }
 }

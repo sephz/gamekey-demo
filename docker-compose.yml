@@ -15,5 +15,19 @@ services:
       - "80:80"
     networks:
       - internal
+  mysql_db:
+      container_name: game-key-db
+      image: mysql:8.0-oracle
+      environment:
+          - MYSQL_DATABASE=game-key-db
+          - MYSQL_RANDOM_ROOT_PASSWORD=yes
+          - MYSQL_USER=db_user
+          - MYSQL_PASSWORD=db_password
+      volumes:
+          - db:/var/lib/mysql
+      ports:
+          - "3306:3306"
+      networks:
+          - internal
 networks:
   internal:
