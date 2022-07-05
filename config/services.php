@@ -31,4 +31,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // commission rate
+    'commission_rate' => env('COMMISSION_RATE', 0.05),
+
 ];

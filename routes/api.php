@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GameKeyController;
 use App\Http\Controllers\TransactionController;
@@ -35,10 +36,13 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::post('/', 'store')->name('store');
     });
 
-
     Route::controller(TransactionController::class)->name('transaction.')->prefix('transaction')->group(function () {
         Route::post('/', 'store')->name('store');
         Route::get('/{uuid}', 'show')->name('show');
+    });
+
+    Route::controller(AuthController::class)->name('user.')->prefix('user')->group(function () {
+        Route::post('/login', 'login')->name('login');
     });
 });
 

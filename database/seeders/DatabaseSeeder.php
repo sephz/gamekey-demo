@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'type' => User::TYPE_MERCHANT,
             'name' => 'I am Merchant',
             'email' => 'merchant@gmail.com',
-            'password' => 'secret',
+            'password' => bcrypt('secret'),
             'email_verified_at' => now(),
             'active' => true,
         ]);
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'type' => User::TYPE_USER,
             'name' => 'I am User',
             'email' => 'user@gmail.com',
-            'password' => 'secret',
+            'password' => bcrypt('secret'),
             'email_verified_at' => now(),
             'active' => true,
         ]);

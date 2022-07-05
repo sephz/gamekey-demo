@@ -46,6 +46,13 @@ class GameKeyTest extends TestCase
             'price' => 1000,
         ]);
 
-        $response->assertOk();
+        $response->assertOk()
+            ->assertJsonStructure([
+                'id',
+                'key',
+                'currency',
+                'price',
+                'formatted_price',
+            ]);
     }
 }

@@ -27,7 +27,12 @@ class GameTest extends TestCase
             'description' => $this->faker->text(),
         ]);
 
-        $response->assertOk();
+        $response->assertOk()
+            ->assertJsonStructure([
+                'id',
+                'title',
+                'description',
+            ]);
 
     }
 
@@ -40,7 +45,12 @@ class GameTest extends TestCase
 
         $response = $this->get(route('api.v1.game.show',['game'=>1]));
 
-        $response->assertOk();
+        $response->assertOk()
+            ->assertJsonStructure([
+                'id',
+                'title',
+                'description',
+            ]);
 
     }
 }

@@ -89,7 +89,7 @@ class TransactionController extends Controller
 
         $buyer = Auth::user();
 
-        $commission_rate = config('app.commission_rate');
+        $commission_rate = config('services.commission_rate', 0.05);
 
         $transaction_id = (string) Str::uuid();
 

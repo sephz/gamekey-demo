@@ -121,7 +121,7 @@ class GameKeyController extends Controller
         ]);
 
         return response()->json([
-            'game_id' => $key->game_id,
+            'id' => $key->id,
             'key' => $key->key,
             'currency' => $key->currency,
             'price' => $key->price,
