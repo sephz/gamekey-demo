@@ -18,6 +18,7 @@ class GameFactory extends Factory
     public function definition()
     {
         return [
+            'merchant_id' => 1,
             'title' => Str::random(40),
             'description' => fake()->text(100),
         ];

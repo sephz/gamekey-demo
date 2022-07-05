@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Game;
 use App\Models\Merchant;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -42,5 +43,7 @@ class DatabaseSeeder extends Seeder
             'secret' => 'E47WUt2ZQncDPZKjebqNzca26Jgsh3YV',
             'active' => true,
         ]);
+
+        Game::factory()->create();
     }
 }

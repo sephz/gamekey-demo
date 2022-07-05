@@ -12,7 +12,29 @@ use Tests\TestCase;
 class GameKeyTest extends TestCase
 {
 
-    public function test_create_key_example()
+    public function test_get_all_keys()
+    {
+        Sanctum::actingAs(
+            User::find(2)
+        );
+
+        $response = $this->get(route('api.v1.gamekey.index'));
+
+        $response->assertOk()
+            ->assertJsonStructure([
+                '*' => [
+                    'key_id',
+                    'game_title',
+                    'description',
+                    'key',
+                    'price',
+                    'currency',
+                    'formatted_price',
+                ]
+            ]);
+    }
+
+    public function test_create_key()
     {
         Sanctum::actingAs(
             User::find(1)
@@ -23,8 +45,6 @@ class GameKeyTest extends TestCase
             'key' => Str::random(20),
             'price' => 1000,
         ]);
-
-        dd($response->getContent());
 
         $response->assertOk();
     }

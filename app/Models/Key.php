@@ -46,7 +46,7 @@ class Key extends Model
      */
     public function game()
     {
-        return $this->belongsTo(Game::class, 'games');
+        return $this->belongsTo(Game::class, 'game_id' );
     }
 
     /**

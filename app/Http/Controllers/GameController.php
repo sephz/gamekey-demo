@@ -6,6 +6,7 @@ use App\Models\Game;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 
 class GameController extends Controller
@@ -22,7 +23,7 @@ class GameController extends Controller
 
     /**
      * @OA\Post(
-     * path="/v1/game/create",
+     * path="api/v1/game/create",
      * summary="Create a new game",
      * description="Add a new game, all the gamekeys belong to a game",
      * operationId="gameCreate",
@@ -32,7 +33,7 @@ class GameController extends Controller
      *    required=true,
      *    description="Pass game with title and description",
      *    @OA\JsonContent(
-     *       required={"description"},
+     *       required={"title","description"},
      *       @OA\Property(property="title", type="string", format="text", example="Steam"),
      *       @OA\Property(property="description", type="string", format="text", example="A cross platform gaming system."),
      *    ),
@@ -65,10 +66,14 @@ class GameController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|max:200',
             'description' => 'sometimes|min:50',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->getMessageBag()->first()], 422);
+        }
 
         // check if user has merchant
 
@@ -97,7 +102,7 @@ class GameController extends Controller
     /**
      *
      * @OA\Get(
-     * path="/v1/game/{gameId}",
+     * path="api/v1/game/{gameId}",
      * summary="Retrieve game information",
      * description="Get game title and description",
      * operationId="gameShow",
