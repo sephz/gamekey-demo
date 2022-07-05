@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Auth;
  *     ),
  * @OA\Response(
  *    response=401,
- *    description="Failed, missing merchant profile",
+ *    description="Login Failed",
  *    @OA\JsonContent(
  *       @OA\Property(property="message", type="string", example="Invalid login details")
  *        )

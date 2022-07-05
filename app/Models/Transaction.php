@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @OA\Property(property="commission", type="integer", description="Commission in cents", example="50"),
  * @OA\Property(property="cc_last", type="string", maxLength=4, description="Last four digits of credit card number", example="1234"),
  * @OA\Property(property="status", type="string", maxLength=25, description="Payment Status", example="COMPLETED"),
- * @OA\Property(property="paid_at", type="date-time"),
+ * @OA\Property(property="paid_at", type="string", format="date-time"),
  * @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  * @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  * )

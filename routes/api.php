@@ -45,7 +45,7 @@ Route::prefix('v1')->name('api.v1.')->middleware('auth:sanctum')->group(function
 
     Route::controller(TransactionController::class)->name('transaction.')->prefix('transaction')->group(function () {
         Route::post('/', 'store')->name('store');
-        Route::get('/{uuid}', 'show')->name('show');
+        Route::get('/{transaction_id}', 'show')->name('show');
     });
 
 });

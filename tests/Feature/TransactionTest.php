@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Jobs\TransactionCallback;
 use App\Mail\OrderConfirmationEmail;
 use App\Models\Key;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -45,6 +46,21 @@ class TransactionTest extends TestCase
                 'success' => true,
                 'message' => true,
                 'transaction_id' => true,
-            ]);;
+            ]);
+
+        $showResponse = $this->get(route('api.v1.transaction.show', ['transaction_id' => $response['transaction_id']]));
+
+        $showResponse->assertOk()
+            ->assertJson([
+                'transaction_id' => true,
+                'key' => true,
+                'total_paid' => true,
+                'commission' => true,
+                'cc_last' => true,
+                'cc_name' => true,
+                'status' => true,
+                'paid_at' => true,
+            ]);
     }
+
 }

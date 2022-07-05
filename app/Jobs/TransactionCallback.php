@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\Http;
  *       @OA\Property(property="key", type="string", example="STEAM1000"),
  *       @OA\Property(property="total_paid", type="int", example="10000"),
  *       @OA\Property(property="commission", type="int", example="500"),
+ *       @OA\Property(property="cc_name", type="string", example="Chew Kai Jun"),
  *       @OA\Property(property="cc_last", type="string", example="1234"),
  *       @OA\Property(property="status", type="string", example="COMPLETED"),
  *       @OA\Property(property="paid_at", type="date", example="2012-12-12 04:04:04")
@@ -78,14 +79,12 @@ class TransactionCallback implements ShouldQueue
         //get the callback url
         $merchant = $this->transaction->merchant();
 
-        // get key
-        $key = $this->transaction->key();
-
         $body = [
             'transaction_id' => $this->transaction->transaction_id,
-            'key' => $key->key,
+            'key' => $this->transaction->key,
             'total_paid' => $this->transaction->total_paid,
             'commission' => $this->transaction->commission,
+            'cc_name' => $this->transaction->cc_name,
             'cc_last' => $this->transaction->cc_last,
             'status' => $this->transaction->status,
             'paid_at' => $this->transaction->paid_at,

@@ -119,7 +119,6 @@ class TransactionController extends Controller
             TransactionCallback::dispatch($transaction);
 
         }catch (\Exception $e){
-            dd($e->getMessage());
             return response()->json(['message' => 'Payment Failed'], 400);
         }
 
@@ -138,14 +137,14 @@ class TransactionController extends Controller
      * operationId="transactionShow",
      * tags={"Transactions"},
      * security={ {"bearer": {} }},
-     * @OA\RequestBody(
-     *    required=true,
-     *    description="Submit game key selection and card number",
-     *    @OA\JsonContent(
-     *       required={"transaction_id"},
-     *       @OA\Property(property="transaction_id", type="string", example="cae9cb39-2424-4038-a837-f128959823d1")
-     *    ),
-     * ),
+     * @OA\Parameter(
+     *     name="transaction_id",
+     *     description="Transaction id from callback.",
+     *     in="path",
+     *     @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
      * @OA\Response(
      *    response=200,
      *    description="Success",
@@ -154,25 +153,35 @@ class TransactionController extends Controller
      *        )
      *     ),
      * @OA\Response(
-     *    response=400,
-     *    description="Invalid Key ID",
+     *    response=401,
+     *    description="Failed",
      *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Invalid Key Id")
-     *        )
-     *     ),
-     * @OA\Response(
-     *    response=422,
-     *    description="Validation Failed",
-     *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Invalid Transaction id")
+     *       @OA\Property(property="message", type="string", example="Record not found")
      *        )
      *     )
      * )
      *
      */
-    public function show($uuid)
+    public function show($transaction_id)
     {
-        //
+        try {
+
+            $transaction = Transaction::where('transaction_id', $transaction_id)->firstOrFail();
+
+            return response()->json([
+                'transaction_id' => $transaction->transaction_id,
+                'key' => $transaction->key,
+                'total_paid' => $transaction->total_paid,
+                'commission' => $transaction->commission,
+                'cc_last' => $transaction->cc_last,
+                'cc_name' => $transaction->cc_name,
+                'status' => $transaction->status,
+                'paid_at' => $transaction->paid_at,
+            ]);
+
+        }catch(\Exception $e) {
+            return response()->json(['message' => 'Record not found'], 404);
+        }
     }
 
 }
