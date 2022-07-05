@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Auth;
 /**
  * @OA\Post(
  * path="api/v1/user/login",
- * summary="Create a new game",
- * description="Add a new game, all the gamekeys belong to a game",
- * operationId="gameCreate",
- * tags={"Games"},
+ * summary="User Login",
+ * description="Authenticate to get API Key for the rest of the protected end points",
+ * operationId="userLogin",
+ * tags={"Auth"},
  * security={ {"bearer": {} }},
  * @OA\RequestBody(
  *    required=true,
@@ -20,14 +20,14 @@ use Illuminate\Support\Facades\Auth;
  *    @OA\JsonContent(
  *       required={"title","description"},
  *       @OA\Property(property="title", type="string", format="text", example="Steam"),
- *       @OA\Property(property="description", type="string", format="text", example="A cross platform gaming system."),
+ *       @OA\Property(property="description", type="string", format="text", example="A cross platform gaming system.")
  *    ),
  * ),
  * @OA\Response(
  *    response=200,
  *    description="Success",
  *    @OA\JsonContent(
- *       @OA\Property(property="access_token", type="string", example="1|4qrnKW3yDVl6UsvjeyqE9oFWr2sDhnRTcN2KZlnn")
+ *       @OA\Property(property="access_token", type="string", example="1|4qrnKW3yDVl6UsvjeyqE9oFWr2sDhnRTcN2KZlnn"),
  *       @OA\Property(property="token_type", type="string", example="Bearer")
  *        )
  *     ),
