@@ -23,6 +23,7 @@
 
     ```
     docker exec game-key composer install
+    docker exec game-key php artisan optimize
     docker exec game-key php artisan migrate --seed
     docker exec game-key php artisan l5-swagger:generate 
 

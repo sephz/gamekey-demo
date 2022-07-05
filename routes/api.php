@@ -18,12 +18,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+
+Route::prefix('v1')->name('api.v1.')->group(function () {
+    Route::controller(AuthController::class)->name('user.')->prefix('user')->group(function () {
+        Route::post('/login', 'login')->name('login');
+    });
 });
 
-//Route::prefix('v1')->name('api.v1.')->middleware('auth:sanctum')->group(function () {
-Route::prefix('v1')->name('api.v1.')->group(function () {
+Route::prefix('v1')->name('api.v1.')->middleware('auth:sanctum')->group(function () {
+//Route::prefix('v1')->name('api.v1.')->group(function () {
 
     Route::controller(GameController::class)->name('game.')->prefix('game')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -41,8 +48,5 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::get('/{uuid}', 'show')->name('show');
     });
 
-    Route::controller(AuthController::class)->name('user.')->prefix('user')->group(function () {
-        Route::post('/login', 'login')->name('login');
-    });
 });
 
